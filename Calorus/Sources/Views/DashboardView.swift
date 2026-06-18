@@ -57,7 +57,7 @@ struct DashboardView: View {
             let blocks = activeBlocksData.split(separator: ",").compactMap { DashboardBlock(rawValue: String($0)) }
             return blocks.isEmpty ? DashboardBlock.allCases : blocks
         }
-        set {
+        nonmutating set {
             activeBlocksData = newValue.map { $0.rawValue }.joined(separator: ",")
         }
     }
@@ -176,7 +176,7 @@ struct DashboardView: View {
                                 }
                             }
                             .modifier(DraggableModifier(isEditing: isEditing, block: block))
-                            .dropDestination(for: String.self) { items, location in
+                            .dropDestination(for: String.self) { (items: [String], location: CGPoint) in
                                 guard let item = items.first, let sourceBlock = DashboardBlock(rawValue: item) else { return false }
                                 withAnimation(.spring) {
                                     moveBlock(sourceBlock, to: block)
