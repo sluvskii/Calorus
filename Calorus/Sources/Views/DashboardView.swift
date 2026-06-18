@@ -19,6 +19,28 @@ enum DashboardBlock: String, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - View Modifier for Wiggle Animation
+struct WiggleModifier: ViewModifier {
+    let isEditing: Bool
+    @State private var isWiggling = false
+
+    func body(content: Content) -> some View {
+        content
+            .rotationEffect(.degrees(isEditing ? (isWiggling ? 1.2 : -1.2) : 0))
+            .onChange(of: isEditing) { newValue in
+                if newValue {
+                    withAnimation(.easeInOut(duration: 0.12).repeatForever(autoreverses: true)) {
+                        isWiggling = true
+                    }
+                } else {
+                    withAnimation(.easeOut(duration: 0.1)) {
+                        isWiggling = false
+                    }
+                }
+            }
+    }
+}
+
 // MARK: - View Modifier for Drag
 struct DraggableModifier: ViewModifier {
     let isEditing: Bool
@@ -146,9 +168,18 @@ struct DashboardView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    if isEditing {
+                        Text("Перетащите виджеты, чтобы изменить их порядок")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 4)
+                            .transition(.opacity)
+                    }
+
                     ForEach(activeBlocks) { block in
                         blockView(for: block)
-                            .overlay(alignment: .topTrailing) {
+                            .overlay(alignment: .topLeading) {
                                 if isEditing {
                                     Button {
                                         withAnimation(.spring) {
@@ -159,11 +190,12 @@ struct DashboardView: View {
                                     } label: {
                                         Image(systemName: "minus.circle.fill")
                                             .font(.title2)
+                                            .symbolRenderingMode(.palette)
                                             .foregroundStyle(.white, .red)
-                                            .background(Circle().fill(.white).frame(width: 20, height: 20))
-                                            .shadow(radius: 2)
+                                            .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
                                     }
-                                    .offset(x: 10, y: -10)
+                                    .offset(x: -8, y: -8)
+                                    .transition(.scale.combined(with: .opacity))
                                 }
                             }
                             .onLongPressGesture(minimumDuration: 0.5) {
@@ -175,15 +207,18 @@ struct DashboardView: View {
                                     }
                                 }
                             }
+                            .modifier(WiggleModifier(isEditing: isEditing))
                             .modifier(DraggableModifier(isEditing: isEditing, block: block))
                             .dropDestination(for: String.self) { (items: [String], location: CGPoint) in
                                 guard let item = items.first, let sourceBlock = DashboardBlock(rawValue: item) else { return false }
                                 withAnimation(.spring) {
                                     moveBlock(sourceBlock, to: block)
+                                    let impact = UIImpactFeedbackGenerator(style: .light)
+                                    impact.impactOccurred()
                                 }
                                 return true
                             }
-                            .scaleEffect(isEditing ? 0.98 : 1.0)
+                            .scaleEffect(isEditing ? 0.96 : 1.0)
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isEditing)
                     }
 
@@ -200,6 +235,19 @@ struct DashboardView: View {
                             .frame(maxWidth: .infinity)
                             .padding(16)
                             .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                        }
+                        .padding(.top, 10)
+                    }
+
+                    if !isEditing {
+                        Button {
+                            withAnimation(.spring) {
+                                isEditing = true
+                            }
+                        } label: {
+                            Text("Настроить экран")
+                                .font(.subheadline)
+                                .foregroundStyle(.blue)
                         }
                         .padding(.top, 10)
                     }
