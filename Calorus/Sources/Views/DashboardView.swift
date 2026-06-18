@@ -1,6 +1,39 @@
 import SwiftUI
 import SwiftData
 import UIKit
+import UniformTypeIdentifiers
+
+// MARK: - Drop Delegate for Live Reordering
+struct BlockDropDelegate: DropDelegate {
+    let item: DashboardBlock
+    @Binding var items: [DashboardBlock]
+    @Binding var draggedItem: DashboardBlock?
+
+    func dropEntered(info: DropInfo) {
+        guard let draggedItem, draggedItem != item else { return }
+        guard let from = items.firstIndex(of: draggedItem),
+              let to = items.firstIndex(of: item) else { return }
+
+        if from != to {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                items.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to + 1 : to)
+                let impact = UIImpactFeedbackGenerator(style: .light)
+                impact.impactOccurred()
+            }
+        }
+    }
+
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        return DropProposal(operation: .move)
+    }
+
+    func performDrop(info: DropInfo) -> Bool {
+        DispatchQueue.main.async {
+            self.draggedItem = nil
+        }
+        return true
+    }
+}
 
 // MARK: - Dashboard Block Enum
 enum DashboardBlock: String, CaseIterable, Identifiable {
@@ -51,38 +84,18 @@ struct DraggableModifier<Preview: View>: ViewModifier {
         if isEditing {
             content
                 .opacity(draggedBlock == block ? 0.01 : 1.0)
-                .draggable(block.rawValue) {
+                .onDrag {
+                    self.draggedBlock = block
+                    return NSItemProvider(object: block.rawValue as NSString)
+                } preview: {
                     preview
-                        .onAppear {
-                            DispatchQueue.main.async {
-                                self.draggedBlock = block
-                            }
-                        }
                         .onDisappear {
                             DispatchQueue.main.async {
                                 self.draggedBlock = nil
                             }
                         }
                 }
-                .dropDestination(for: String.self) { items, location in
-                    DispatchQueue.main.async {
-                        self.draggedBlock = nil
-                    }
-                    return true
-                } isTargeted: { targeted in
-                    if targeted, let dragged = draggedBlock, dragged != block {
-                        if let from = activeBlocks.firstIndex(of: dragged),
-                           let to = activeBlocks.firstIndex(of: block),
-                           from != to {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                let moved = activeBlocks.remove(at: from)
-                                activeBlocks.insert(moved, at: to)
-                                let impact = UIImpactFeedbackGenerator(style: .light)
-                                impact.impactOccurred()
-                            }
-                        }
-                    }
-                }
+                .onDrop(of: [UTType.plainText], delegate: BlockDropDelegate(item: block, items: $activeBlocks, draggedItem: $draggedBlock))
         } else {
             content
         }
