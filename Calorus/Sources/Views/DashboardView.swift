@@ -3,40 +3,8 @@ import SwiftData
 import UIKit
 import UniformTypeIdentifiers
 
-// MARK: - Drop Delegate for Live Reordering
-struct BlockDropDelegate: DropDelegate {
-    let item: DashboardBlock
-    @Binding var items: [DashboardBlock]
-    @Binding var draggedItem: DashboardBlock?
-
-    func dropEntered(info: DropInfo) {
-        guard let draggedItem, draggedItem != item else { return }
-        guard let from = items.firstIndex(of: draggedItem),
-              let to = items.firstIndex(of: item) else { return }
-
-        if from != to {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                items.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to + 1 : to)
-                let impact = UIImpactFeedbackGenerator(style: .light)
-                impact.impactOccurred()
-            }
-        }
-    }
-
-    func dropUpdated(info: DropInfo) -> DropProposal? {
-        return DropProposal(operation: .move)
-    }
-
-    func performDrop(info: DropInfo) -> Bool {
-        DispatchQueue.main.async {
-            self.draggedItem = nil
-        }
-        return true
-    }
-}
-
 // MARK: - Dashboard Block Enum
-enum DashboardBlock: String, CaseIterable, Identifiable {
+enum DashboardBlock: String, CaseIterable, Identifiable, Codable {
     case summary, formula, quickActions, meals, activities, timeline
     var id: String { rawValue }
 
@@ -59,7 +27,7 @@ struct WiggleModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .rotationEffect(.degrees(isEditing ? (isWiggling ? 0.8 : -0.8) : 0))
+            .rotationEffect(.degrees(isEditing ? (isWiggling ? 0.5 : -0.5) : 0))
             .animation(isEditing ? .easeInOut(duration: 0.12).repeatForever(autoreverses: true) : .easeOut(duration: 0.1), value: isWiggling)
             .onChange(of: isEditing) { newValue in
                 isWiggling = newValue
@@ -69,36 +37,6 @@ struct WiggleModifier: ViewModifier {
                     isWiggling = true
                 }
             }
-    }
-}
-
-// MARK: - View Modifier for Drag
-struct DraggableModifier<Preview: View>: ViewModifier {
-    let isEditing: Bool
-    let block: DashboardBlock
-    @Binding var activeBlocks: [DashboardBlock]
-    @Binding var draggedBlock: DashboardBlock?
-    let preview: Preview
-
-    func body(content: Content) -> some View {
-        if isEditing {
-            content
-                .opacity(draggedBlock == block ? 0.01 : 1.0)
-                .onDrag {
-                    self.draggedBlock = block
-                    return NSItemProvider(object: block.rawValue as NSString)
-                } preview: {
-                    preview
-                        .onDisappear {
-                            DispatchQueue.main.async {
-                                self.draggedBlock = nil
-                            }
-                        }
-                }
-                .onDrop(of: [UTType.plainText], delegate: BlockDropDelegate(item: block, items: $activeBlocks, draggedItem: $draggedBlock))
-        } else {
-            content
-        }
     }
 }
 
@@ -252,15 +190,17 @@ struct DashboardView: View {
                                 }
                             }
                             .modifier(WiggleModifier(isEditing: isEditing))
-                            .modifier(DraggableModifier(
-                                isEditing: isEditing,
-                                block: block,
-                                activeBlocks: Binding(get: { activeBlocks }, set: { activeBlocks = $0 }),
-                                draggedBlock: $draggedBlock,
-                                preview: blockView(for: block)
+                            .onDrag {
+                                guard isEditing else { return NSItemProvider() }
+                                self.draggedBlock = block
+                                return NSItemProvider(object: block.rawValue as NSString)
+                            } preview: {
+                                blockView(for: block)
                                     .frame(width: UIScreen.main.bounds.width - 40)
-                                    .shadow(color: .black.opacity(0.15), radius: 10, x: 0, y: 5)
-                            ))
+                                    .shadow(color: .black.opacity(0.2), radius: 12, x: 0, y: 8)
+                            }
+                            .onDrop(of: [UTType.plainText], delegate: BlockDropDelegate(item: block, items: $activeBlocks, draggedItem: $draggedBlock))
+                            .opacity(draggedBlock == block ? 0.01 : 1.0)
                             .scaleEffect(isEditing ? 0.96 : 1.0)
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isEditing)
                     }
