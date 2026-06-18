@@ -205,15 +205,14 @@ enum ActivityType: String, Codable, CaseIterable {
 
 @Model
 final class Activity {
-    var id: UUID
-    var name: String
-    var type: ActivityType
-    var inputValue: Double
-    var caloriesBurned: Int
-    var date: Date
+    var id: UUID = UUID()
+    var name: String = ""
+    var type: ActivityType = .walking
+    var inputValue: Double = 0
+    var caloriesBurned: Int = 0
+    var date: Date = Date()
 
     init(type: ActivityType, inputValue: Double, caloriesBurned: Int, date: Date = Date()) {
-        self.id = UUID()
         self.name = type.rawValue
         self.type = type
         self.inputValue = inputValue
@@ -224,14 +223,14 @@ final class Activity {
 
 @Model
 final class UserProfile {
-    var id: UUID
-    var dailyCalorieGoal: Int
-    var weightKg: Double
-    var heightCm: Double
-    var age: Int
-    var sex: BiologicalSex
-    var lifestyle: LifestyleActivityLevel
-    var goalPreference: GoalPreference
+    var id: UUID = UUID()
+    var dailyCalorieGoal: Int = 2000
+    var weightKg: Double = 70
+    var heightCm: Double = 175
+    var age: Int = 30
+    var sex: BiologicalSex = .male
+    var lifestyle: LifestyleActivityLevel = .light
+    var goalPreference: GoalPreference = .maintain
 
     init(
         dailyCalorieGoal: Int = 2000,
@@ -242,7 +241,6 @@ final class UserProfile {
         lifestyle: LifestyleActivityLevel = .light,
         goalPreference: GoalPreference = .maintain
     ) {
-        self.id = UUID()
         self.dailyCalorieGoal = dailyCalorieGoal
         self.weightKg = weightKg
         self.heightCm = heightCm
