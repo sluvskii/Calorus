@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: macos-14
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -22,12 +24,31 @@ jobs:
     - name: Generate Xcode Project
       run: xcodegen generate
 
-    - name: Build
+    - name: Build and Archive
       run: |
-        xcodebuild clean build \
+        xcodebuild clean archive \
           -project Calorus.xcodeproj \
           -scheme Calorus \
-          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          -configuration Release \
+          -sdk iphoneos \
+          -archivePath $PWD/build/Calorus.xcarchive \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO
+
+    - name: Create IPA
+      run: |
+        mkdir -p build/Payload
+        cp -R build/Calorus.xcarchive/Products/Applications/Calorus.app build/Payload/
+        cd build
+        zip -r Calorus.ipa Payload
+
+    - name: Upload Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "build-${{ github.run_number }}"
+        name: "Calorus Build #${{ github.run_number }}"
+        files: build/Calorus.ipa
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
