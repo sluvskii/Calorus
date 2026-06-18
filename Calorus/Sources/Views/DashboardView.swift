@@ -332,6 +332,8 @@ struct DashboardView: View {
     }
 
     // MARK: - Block Views
+    
+    private var summaryCard: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
