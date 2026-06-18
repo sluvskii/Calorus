@@ -27,3 +27,8 @@ targets:
         DEVELOPMENT_TEAM: "" # To be filled by CI if code signing is setup
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_IDENTITY: "Apple Development"
+      configs:
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+        Release:
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"

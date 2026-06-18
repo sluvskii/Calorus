@@ -51,10 +51,10 @@ struct DashboardView: View {
         return min(max(Double(netCalories) / Double(calorieGoal), 0), 1)
     }
 
-    private var mealSummaries: [(type: MealType, total: Int, count: Int)] {
+    private var mealSummaries: [MealSummary] {
         MealType.allCases.map { type in
             let items = todayConsumptions.filter { $0.type == type }
-            return (
+            return MealSummary(
                 type: type,
                 total: items.reduce(0) { $0 + $1.calories },
                 count: items.count
@@ -111,7 +111,7 @@ struct DashboardView: View {
                 ensureProfileExists()
                 profile?.recalculateDailyCalorieGoal()
             }
-            .onChange(of: profiles.count) { _, _ in
+            .onChange(of: profiles.count) { _ in
                 ensureProfileExists()
             }
             .sheet(isPresented: $showingAddConsumption) {
@@ -277,6 +277,12 @@ struct DashboardView: View {
         let profile = UserProfile()
         modelContext.insert(profile)
     }
+}
+
+private struct MealSummary {
+    let type: MealType
+    let total: Int
+    let count: Int
 }
 
 private struct TodayRecord: Identifiable {
