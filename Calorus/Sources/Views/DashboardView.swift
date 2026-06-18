@@ -1,6 +1,46 @@
 import SwiftUI
 import SwiftData
+import UIKit
+import UniformTypeIdentifiers
 
+// MARK: - Dashboard Block Enum
+enum DashboardBlock: String, CaseIterable, Identifiable, Codable {
+    case summary, formula, quickActions, meals, activities, timeline
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .summary: return "Сводка"
+        case .formula: return "Формула дня"
+        case .quickActions: return "Быстрые действия"
+        case .meals: return "Приемы пищи"
+        case .activities: return "Активность"
+        case .timeline: return "Лента за сегодня"
+        }
+    }
+}
+
+// MARK: - View Modifier for Wiggle Animation
+struct WiggleModifier: ViewModifier {
+    let isEditing: Bool
+    @State private var isWiggling = false
+
+    func body(content: Content) -> some View {
+        content
+            .rotationEffect(.degrees(isEditing ? (isWiggling ? 0.5 : -0.5) : 0))
+            .animation(isEditing ? .easeInOut(duration: 0.12).repeatForever(autoreverses: true) : .easeOut(duration: 0.1), value: isWiggling)
+            .onChange(of: isEditing) { newValue in
+                isWiggling = newValue
+            }
+            .onAppear {
+                if isEditing {
+                    isWiggling = true
+                }
+            }
+    }
+}
+
+// MARK: - Main Dashboard View
 struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var consumptions: [Consumption]
@@ -9,6 +49,22 @@ struct DashboardView: View {
 
     @State private var showingAddConsumption = false
     @State private var showingAddActivity = false
+
+    // Edit Mode States
+    @AppStorage("dashboardBlocks") private var activeBlocksData: String = "summary,formula,quickActions,meals,activities,timeline"
+    @State private var isEditing = false
+    @State private var showingAddBlock = false
+    @State private var draggedBlock: DashboardBlock? = nil
+
+    private var activeBlocks: [DashboardBlock] {
+        get {
+            let blocks = activeBlocksData.split(separator: ",").compactMap { DashboardBlock(rawValue: String($0)) }
+            return blocks.isEmpty ? DashboardBlock.allCases : blocks
+        }
+        nonmutating set {
+            activeBlocksData = newValue.map { $0.rawValue }.joined(separator: ",")
+        }
+    }
 
     private var profile: UserProfile? {
         profiles.first
@@ -94,12 +150,90 @@ struct DashboardView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    summaryCard
-                    formulaCard
-                    quickActionsCard
-                    mealsCard
-                    activitiesCard
-                    timelineCard
+                    if isEditing {
+                        Text("Перетащите виджеты, чтобы изменить их порядок")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 4)
+                            .transition(.opacity)
+                    }
+
+                    ForEach(activeBlocks) { block in
+                        blockView(for: block)
+                            .overlay(alignment: .topTrailing) {
+                                if isEditing {
+                                    Button {
+                                        withAnimation(.spring) {
+                                            var blocks = activeBlocks
+                                            blocks.removeAll { $0 == block }
+                                            activeBlocks = blocks
+                                        }
+                                    } label: {
+                                        Image(systemName: "minus.circle.fill")
+                                            .font(.title2)
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(.white, .red)
+                                            .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
+                                    }
+                                    .offset(x: 8, y: -8)
+                                    .transition(.scale.combined(with: .opacity))
+                                }
+                            }
+                            .onLongPressGesture(minimumDuration: 0.5) {
+                                if !isEditing {
+                                    let impact = UIImpactFeedbackGenerator(style: .medium)
+                                    impact.impactOccurred()
+                                    withAnimation(.spring) {
+                                        isEditing = true
+                                    }
+                                }
+                            }
+                            .modifier(WiggleModifier(isEditing: isEditing))
+                            .onDrag {
+                                guard isEditing else { return NSItemProvider() }
+                                self.draggedBlock = block
+                                return NSItemProvider(object: block.rawValue as NSString)
+                            } preview: {
+                                blockView(for: block)
+                                    .frame(width: UIScreen.main.bounds.width - 40)
+                                    .shadow(color: .black.opacity(0.2), radius: 12, x: 0, y: 8)
+                            }
+                            .onDrop(of: [UTType.plainText], delegate: BlockDropDelegate(item: block, items: $activeBlocks, draggedItem: $draggedBlock))
+                            .opacity(draggedBlock == block ? 0.01 : 1.0)
+                            .scaleEffect(isEditing ? 0.96 : 1.0)
+                            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isEditing)
+                    }
+
+                    if isEditing {
+                        Button {
+                            showingAddBlock = true
+                        } label: {
+                            HStack {
+                                Image(systemName: "plus.circle.fill")
+                                Text("Добавить виджет")
+                            }
+                            .font(.headline)
+                            .foregroundStyle(.blue)
+                            .frame(maxWidth: .infinity)
+                            .padding(16)
+                            .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                        }
+                        .padding(.top, 10)
+                    }
+
+                    if !isEditing {
+                        Button {
+                            withAnimation(.spring) {
+                                isEditing = true
+                            }
+                        } label: {
+                            Text("Настроить экран")
+                                .font(.subheadline)
+                                .foregroundStyle(.blue)
+                        }
+                        .padding(.top, 10)
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
@@ -107,6 +241,18 @@ struct DashboardView: View {
             }
             .navigationTitle("Сегодня")
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                if isEditing {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Готово") {
+                            withAnimation(.spring) {
+                                isEditing = false
+                            }
+                        }
+                        .fontWeight(.bold)
+                    }
+                }
+            }
             .onAppear {
                 ensureProfileExists()
                 profile?.recalculateDailyCalorieGoal()
@@ -120,9 +266,29 @@ struct DashboardView: View {
             .sheet(isPresented: $showingAddActivity) {
                 AddActivityView()
             }
+            .sheet(isPresented: $showingAddBlock) {
+                AddBlockSheet(activeBlocks: Binding(
+                    get: { activeBlocks },
+                    set: { activeBlocks = $0 }
+                ))
+            }
         }
     }
 
+    @ViewBuilder
+    private func blockView(for block: DashboardBlock) -> some View {
+        switch block {
+        case .summary: summaryCard
+        case .formula: formulaCard
+        case .quickActions: quickActionsCard
+        case .meals: mealsCard
+        case .activities: activitiesCard
+        case .timeline: timelineCard
+        }
+    }
+
+    // MARK: - Block Views
+    
     private var summaryCard: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .top) {
@@ -276,6 +442,56 @@ struct DashboardView: View {
         guard profiles.isEmpty else { return }
         let profile = UserProfile()
         modelContext.insert(profile)
+    }
+}
+
+// MARK: - Helper Views & Models
+
+struct AddBlockSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @Binding var activeBlocks: [DashboardBlock]
+
+    var inactiveBlocks: [DashboardBlock] {
+        DashboardBlock.allCases.filter { !activeBlocks.contains($0) }
+    }
+
+    var body: some View {
+        NavigationStack {
+            List {
+                if inactiveBlocks.isEmpty {
+                    Text("Все виджеты уже на экране")
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(inactiveBlocks) { block in
+                        Button {
+                            withAnimation(.spring) {
+                                activeBlocks.append(block)
+                            }
+                            dismiss()
+                        } label: {
+                            HStack {
+                                Text(block.title)
+                                    .foregroundStyle(.primary)
+                                Spacer()
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundStyle(.blue)
+                                    .font(.title3)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Добавить виджет")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Готово") { dismiss() }
+                        .fontWeight(.bold)
+                }
+            }
+        }
+        .presentationDetents([.medium, .large])
     }
 }
 
