@@ -1,6 +1,43 @@
 import SwiftUI
 import SwiftData
+import UIKit
 
+// MARK: - Dashboard Block Enum
+enum DashboardBlock: String, CaseIterable, Identifiable {
+    case summary, formula, quickActions, meals, activities, timeline
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .summary: return "Сводка"
+        case .formula: return "Формула дня"
+        case .quickActions: return "Быстрые действия"
+        case .meals: return "Приемы пищи"
+        case .activities: return "Активность"
+        case .timeline: return "Лента за сегодня"
+        }
+    }
+}
+
+// MARK: - View Modifier for Drag
+struct DraggableModifier: ViewModifier {
+    let isEditing: Bool
+    let block: DashboardBlock
+
+    func body(content: Content) -> some View {
+        if isEditing {
+            content
+                .draggable(block.rawValue) {
+                    content
+                        .opacity(0.8)
+                }
+        } else {
+            content
+        }
+    }
+}
+
+// MARK: - Main Dashboard View
 struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var consumptions: [Consumption]
@@ -9,6 +46,21 @@ struct DashboardView: View {
 
     @State private var showingAddConsumption = false
     @State private var showingAddActivity = false
+
+    // Edit Mode States
+    @AppStorage("dashboardBlocks") private var activeBlocksData: String = "summary,formula,quickActions,meals,activities,timeline"
+    @State private var isEditing = false
+    @State private var showingAddBlock = false
+
+    private var activeBlocks: [DashboardBlock] {
+        get {
+            let blocks = activeBlocksData.split(separator: ",").compactMap { DashboardBlock(rawValue: String($0)) }
+            return blocks.isEmpty ? DashboardBlock.allCases : blocks
+        }
+        set {
+            activeBlocksData = newValue.map { $0.rawValue }.joined(separator: ",")
+        }
+    }
 
     private var profile: UserProfile? {
         profiles.first
@@ -94,12 +146,63 @@ struct DashboardView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    summaryCard
-                    formulaCard
-                    quickActionsCard
-                    mealsCard
-                    activitiesCard
-                    timelineCard
+                    ForEach(activeBlocks) { block in
+                        blockView(for: block)
+                            .overlay(alignment: .topTrailing) {
+                                if isEditing {
+                                    Button {
+                                        withAnimation(.spring) {
+                                            var blocks = activeBlocks
+                                            blocks.removeAll { $0 == block }
+                                            activeBlocks = blocks
+                                        }
+                                    } label: {
+                                        Image(systemName: "minus.circle.fill")
+                                            .font(.title2)
+                                            .foregroundStyle(.white, .red)
+                                            .background(Circle().fill(.white).frame(width: 20, height: 20))
+                                            .shadow(radius: 2)
+                                    }
+                                    .offset(x: 10, y: -10)
+                                }
+                            }
+                            .onLongPressGesture(minimumDuration: 0.5) {
+                                if !isEditing {
+                                    let impact = UIImpactFeedbackGenerator(style: .medium)
+                                    impact.impactOccurred()
+                                    withAnimation(.spring) {
+                                        isEditing = true
+                                    }
+                                }
+                            }
+                            .modifier(DraggableModifier(isEditing: isEditing, block: block))
+                            .dropDestination(for: String.self) { items, location in
+                                guard let item = items.first, let sourceBlock = DashboardBlock(rawValue: item) else { return false }
+                                withAnimation(.spring) {
+                                    moveBlock(sourceBlock, to: block)
+                                }
+                                return true
+                            }
+                            .scaleEffect(isEditing ? 0.98 : 1.0)
+                            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isEditing)
+                    }
+
+                    if isEditing {
+                        Button {
+                            showingAddBlock = true
+                        } label: {
+                            HStack {
+                                Image(systemName: "plus.circle.fill")
+                                Text("Добавить виджет")
+                            }
+                            .font(.headline)
+                            .foregroundStyle(.blue)
+                            .frame(maxWidth: .infinity)
+                            .padding(16)
+                            .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                        }
+                        .padding(.top, 10)
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
@@ -107,6 +210,18 @@ struct DashboardView: View {
             }
             .navigationTitle("Сегодня")
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                if isEditing {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Готово") {
+                            withAnimation(.spring) {
+                                isEditing = false
+                            }
+                        }
+                        .fontWeight(.bold)
+                    }
+                }
+            }
             .onAppear {
                 ensureProfileExists()
                 profile?.recalculateDailyCalorieGoal()
@@ -120,9 +235,41 @@ struct DashboardView: View {
             .sheet(isPresented: $showingAddActivity) {
                 AddActivityView()
             }
+            .sheet(isPresented: $showingAddBlock) {
+                AddBlockSheet(activeBlocks: Binding(
+                    get: { activeBlocks },
+                    set: { activeBlocks = $0 }
+                ))
+            }
         }
     }
 
+    @ViewBuilder
+    private func blockView(for block: DashboardBlock) -> some View {
+        switch block {
+        case .summary: summaryCard
+        case .formula: formulaCard
+        case .quickActions: quickActionsCard
+        case .meals: mealsCard
+        case .activities: activitiesCard
+        case .timeline: timelineCard
+        }
+    }
+
+    private func moveBlock(_ source: DashboardBlock, to destination: DashboardBlock) {
+        var blocks = activeBlocks
+        guard let sourceIndex = blocks.firstIndex(of: source),
+              let destIndex = blocks.firstIndex(of: destination),
+              sourceIndex != destIndex else { return }
+
+        blocks.remove(at: sourceIndex)
+        let insertIndex = blocks.firstIndex(of: destination) ?? 0
+        blocks.insert(source, at: sourceIndex < destIndex ? insertIndex + 1 : insertIndex)
+        activeBlocks = blocks
+    }
+
+    // MARK: - Block Views
+    
     private var summaryCard: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .top) {
@@ -276,6 +423,56 @@ struct DashboardView: View {
         guard profiles.isEmpty else { return }
         let profile = UserProfile()
         modelContext.insert(profile)
+    }
+}
+
+// MARK: - Helper Views & Models
+
+struct AddBlockSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @Binding var activeBlocks: [DashboardBlock]
+
+    var inactiveBlocks: [DashboardBlock] {
+        DashboardBlock.allCases.filter { !activeBlocks.contains($0) }
+    }
+
+    var body: some View {
+        NavigationStack {
+            List {
+                if inactiveBlocks.isEmpty {
+                    Text("Все виджеты уже на экране")
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(inactiveBlocks) { block in
+                        Button {
+                            withAnimation(.spring) {
+                                activeBlocks.append(block)
+                            }
+                            dismiss()
+                        } label: {
+                            HStack {
+                                Text(block.title)
+                                    .foregroundStyle(.primary)
+                                Spacer()
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundStyle(.blue)
+                                    .font(.title3)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Добавить виджет")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Готово") { dismiss() }
+                        .fontWeight(.bold)
+                }
+            }
+        }
+        .presentationDetents([.medium, .large])
     }
 }
 
