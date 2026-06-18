@@ -19,6 +19,34 @@ enum DashboardBlock: String, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - Drop Delegate for Live Reordering
+struct BlockDropDelegate: DropDelegate {
+    let item: DashboardBlock
+    @Binding var items: [DashboardBlock]
+    @Binding var draggedItem: DashboardBlock?
+
+    func dropEntered(info: DropInfo) {
+        guard let draggedItem, draggedItem != item else { return }
+        guard let from = items.firstIndex(of: draggedItem),
+              let to = items.firstIndex(of: item) else { return }
+
+        if from != to {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                items.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to + 1 : to)
+            }
+        }
+    }
+
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        return DropProposal(operation: .move)
+    }
+
+    func performDrop(info: DropInfo) -> Bool {
+        draggedItem = nil
+        return true
+    }
+}
+
 // MARK: - View Modifier for Wiggle Animation
 struct WiggleModifier: ViewModifier {
     let isEditing: Bool
@@ -26,16 +54,14 @@ struct WiggleModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .rotationEffect(.degrees(isEditing ? (isWiggling ? 1.2 : -1.2) : 0))
+            .rotationEffect(.degrees(isEditing ? (isWiggling ? 1.5 : -1.5) : 0))
+            .animation(isEditing ? .easeInOut(duration: 0.12).repeatForever(autoreverses: true) : .easeOut(duration: 0.1), value: isWiggling)
             .onChange(of: isEditing) { newValue in
-                if newValue {
-                    withAnimation(.easeInOut(duration: 0.12).repeatForever(autoreverses: true)) {
-                        isWiggling = true
-                    }
-                } else {
-                    withAnimation(.easeOut(duration: 0.1)) {
-                        isWiggling = false
-                    }
+                isWiggling = newValue
+            }
+            .onAppear {
+                if isEditing {
+                    isWiggling = true
                 }
             }
     }
@@ -45,14 +71,18 @@ struct WiggleModifier: ViewModifier {
 struct DraggableModifier: ViewModifier {
     let isEditing: Bool
     let block: DashboardBlock
+    @Binding var activeBlocks: [DashboardBlock]
+    @Binding var draggedBlock: DashboardBlock?
 
     func body(content: Content) -> some View {
         if isEditing {
             content
-                .draggable(block.rawValue) {
-                    content
-                        .opacity(0.8)
+                .opacity(draggedBlock == block ? 0.01 : 1.0)
+                .onDrag {
+                    self.draggedBlock = block
+                    return NSItemProvider(object: block.rawValue as NSString)
                 }
+                .onDrop(of: [.text], delegate: BlockDropDelegate(item: block, items: $activeBlocks, draggedItem: $draggedBlock))
         } else {
             content
         }
@@ -73,6 +103,7 @@ struct DashboardView: View {
     @AppStorage("dashboardBlocks") private var activeBlocksData: String = "summary,formula,quickActions,meals,activities,timeline"
     @State private var isEditing = false
     @State private var showingAddBlock = false
+    @State private var draggedBlock: DashboardBlock? = nil
 
     private var activeBlocks: [DashboardBlock] {
         get {
@@ -179,7 +210,7 @@ struct DashboardView: View {
 
                     ForEach(activeBlocks) { block in
                         blockView(for: block)
-                            .overlay(alignment: .topLeading) {
+                            .overlay(alignment: .topTrailing) {
                                 if isEditing {
                                     Button {
                                         withAnimation(.spring) {
@@ -194,7 +225,7 @@ struct DashboardView: View {
                                             .foregroundStyle(.white, .red)
                                             .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
                                     }
-                                    .offset(x: -8, y: -8)
+                                    .offset(x: 8, y: -8)
                                     .transition(.scale.combined(with: .opacity))
                                 }
                             }
@@ -208,16 +239,12 @@ struct DashboardView: View {
                                 }
                             }
                             .modifier(WiggleModifier(isEditing: isEditing))
-                            .modifier(DraggableModifier(isEditing: isEditing, block: block))
-                            .dropDestination(for: String.self) { (items: [String], location: CGPoint) in
-                                guard let item = items.first, let sourceBlock = DashboardBlock(rawValue: item) else { return false }
-                                withAnimation(.spring) {
-                                    moveBlock(sourceBlock, to: block)
-                                    let impact = UIImpactFeedbackGenerator(style: .light)
-                                    impact.impactOccurred()
-                                }
-                                return true
-                            }
+                            .modifier(DraggableModifier(
+                                isEditing: isEditing,
+                                block: block,
+                                activeBlocks: Binding(get: { activeBlocks }, set: { activeBlocks = $0 }),
+                                draggedBlock: $draggedBlock
+                            ))
                             .scaleEffect(isEditing ? 0.96 : 1.0)
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isEditing)
                     }
@@ -304,21 +331,7 @@ struct DashboardView: View {
         }
     }
 
-    private func moveBlock(_ source: DashboardBlock, to destination: DashboardBlock) {
-        var blocks = activeBlocks
-        guard let sourceIndex = blocks.firstIndex(of: source),
-              let destIndex = blocks.firstIndex(of: destination),
-              sourceIndex != destIndex else { return }
-
-        blocks.remove(at: sourceIndex)
-        let insertIndex = blocks.firstIndex(of: destination) ?? 0
-        blocks.insert(source, at: sourceIndex < destIndex ? insertIndex + 1 : insertIndex)
-        activeBlocks = blocks
-    }
-
     // MARK: - Block Views
-    
-    private var summaryCard: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
