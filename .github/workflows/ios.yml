@@ -1,0 +1,57 @@
+name: iOS Build
+
+on:
+  push:
+    branches: [ "main", "trae**" ]
+  pull_request:
+    branches: [ "main", "trae**" ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Select Xcode
+      run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer || true
+
+    - name: Install XcodeGen
+      run: brew install xcodegen
+
+    - name: Generate Xcode Project
+      run: xcodegen generate
+
+    - name: Build iOS App
+      run: |
+        xcodebuild clean build \
+          -project Calorus.xcodeproj \
+          -scheme Calorus \
+          -configuration Release \
+          -sdk iphoneos \
+          -derivedDataPath ./build \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
+
+    - name: Package IPA (Unsigned)
+      run: |
+        mkdir -p Payload
+        mv build/Build/Products/Release-iphoneos/Calorus.app Payload/
+        zip -r Calorus.ipa Payload
+
+    - name: Upload Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "build-${{ github.run_number }}"
+        name: "Calorus Build #${{ github.run_number }}"
+        body: |
+          Auto-generated IPA build from the latest commit.
+          **Note:** This is an unsigned IPA file.
+        files: Calorus.ipa
+        draft: false
+        prerelease: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
