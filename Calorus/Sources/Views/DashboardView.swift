@@ -1,5 +1,8 @@
 import SwiftUI
 import SwiftData
+#if canImport(FoundationModels)
+import FoundationModels
+#endif
 
 struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
@@ -9,6 +12,8 @@ struct DashboardView: View {
     
     @State private var showingAddConsumption = false
     @State private var showingAddActivity = false
+    @State private var aiSummary: String? = nil
+
     
     private var todayConsumptions: [Consumption] {
         let today = Date().startOfDay
@@ -75,6 +80,26 @@ struct DashboardView: View {
                     }
                     .padding(.horizontal, 24)
                     
+                    // iOS 26 Foundation Models Feature
+                    #if canImport(FoundationModels)
+                    if let summary = aiSummary {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Image(systemName: "sparkles")
+                                    .foregroundColor(.purple)
+                                Text("Apple Intelligence")
+                                    .font(.headline)
+                            }
+                            Text(summary)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 16))
+                        .padding(.horizontal, 24)
+                    }
+                    #endif
+                    
                     // Recent Items
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Сегодня")
@@ -108,7 +133,10 @@ struct DashboardView: View {
                 if profiles.isEmpty {
                     modelContext.insert(UserProfile())
                 }
+                generateAISummary()
             }
+            .onChange(of: consumptions.count) { _ in generateAISummary() }
+            .onChange(of: activities.count) { _ in generateAISummary() }
             .sheet(isPresented: $showingAddConsumption) {
                 AddConsumptionView()
             }
@@ -116,6 +144,23 @@ struct DashboardView: View {
                 AddActivityView()
             }
         }
+    }
+    
+    private func generateAISummary() {
+        #if canImport(FoundationModels)
+        Task {
+            let session = LanguageModelSession(instructions: "Ты ассистент по питанию. Кратко проанализируй день в 1-2 предложениях на основе съеденных калорий и активности.")
+            do {
+                let info = "Съедено: \(caloriesEaten) ккал. Сожжено: \(caloriesBurned) ккал. Осталось: \(caloriesRemaining) ккал."
+                let response = try await session.respond(to: info)
+                await MainActor.run {
+                    self.aiSummary = response.content
+                }
+            } catch {
+                print("AI error: \(error)")
+            }
+        }
+        #endif
     }
 }
 
@@ -154,9 +199,8 @@ struct ActionButton: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .background(Color(UIColor.secondarySystemBackground))
+            .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 16))
             .foregroundColor(color)
-            .cornerRadius(16)
         }
     }
 }
@@ -183,7 +227,6 @@ struct RecordRow: View {
                 .foregroundColor(isPositive ? .primary : .secondary)
         }
         .padding()
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(12)
+        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 12))
     }
 }

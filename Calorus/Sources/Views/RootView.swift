@@ -35,15 +35,8 @@ struct RootView: View {
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 24)
-            .background(
-                Capsule()
-                    .fill(Color(UIColor.systemBackground))
-                    .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
-                    .overlay(
-                        Capsule()
-                            .stroke(Color(UIColor.separator).opacity(0.5), lineWidth: 0.5)
-                    )
-            )
+            .glassEffect(in: Capsule()) // iOS 26 Liquid Glass API
+            .shadow(radius: 12, y: 4)
             .padding(.bottom, 16)
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
