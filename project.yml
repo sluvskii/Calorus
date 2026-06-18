@@ -11,6 +11,7 @@ targets:
     sources:
       - path: Calorus/Sources
       - path: Calorus/Resources
+        optional: true
     info:
       path: Calorus/Info.plist
       properties:
@@ -26,5 +27,5 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         SWIFT_VERSION: 5.9
         CODE_SIGN_IDENTITY: ""
-        CODE_SIGNING_REQUIRED: NO
-        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGNING_ALLOWED: "NO"
