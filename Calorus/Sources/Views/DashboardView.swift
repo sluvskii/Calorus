@@ -1,5 +1,8 @@
 import SwiftUI
 import SwiftData
+#if canImport(FoundationModels)
+import FoundationModels
+#endif
 
 struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
@@ -9,6 +12,7 @@ struct DashboardView: View {
     
     @State private var showingAddConsumption = false
     @State private var showingAddActivity = false
+    @State private var aiSummary: String? = nil
     
     private var todayConsumptions: [Consumption] {
         let today = Date().startOfDay
@@ -40,50 +44,22 @@ struct DashboardView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 32) {
-                    // Main Summary with Circular Progress
-                    ZStack {
-                        // Background Circle
-                        Circle()
-                            .stroke(Color(UIColor.tertiarySystemFill), lineWidth: 24)
-                            .frame(width: 240, height: 240)
+                    // Main Summary
+                    VStack(spacing: 8) {
+                        Text("Осталось")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .textCase(.uppercase)
                         
-                        // Progress Circle
-                        let progress = min(max(CGFloat(caloriesEaten - caloriesBurned) / CGFloat(calorieGoal), 0), 1)
-                        Circle()
-                            .trim(from: 0, to: progress)
-                            .stroke(
-                                AngularGradient(
-                                    gradient: Gradient(colors: [.green, .blue]),
-                                    center: .center,
-                                    startAngle: .degrees(0),
-                                    endAngle: .degrees(360)
-                                ),
-                                style: StrokeStyle(lineWidth: 24, lineCap: .round)
-                            )
-                            .rotationEffect(.degrees(-90))
-                            .frame(width: 240, height: 240)
-                            .animation(.spring(response: 0.6, dampingFraction: 0.8), value: progress)
+                        Text("\(caloriesRemaining)")
+                            .font(.system(size: 64, weight: .bold, design: .rounded))
+                            .foregroundColor(caloriesRemaining >= 0 ? .primary : .red)
                         
-                        // Text inside
-                        VStack(spacing: 4) {
-                            Text("Осталось")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .textCase(.uppercase)
-                            
-                            Text("\(caloriesRemaining)")
-                                .font(.system(size: 54, weight: .bold, design: .rounded))
-                                .foregroundColor(caloriesRemaining >= 0 ? .primary : .red)
-                                .minimumScaleFactor(0.5)
-                                .lineLimit(1)
-                            
-                            Text("из \(calorieGoal) ккал")
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                        }
-                        .frame(width: 160)
+                        Text("ккал")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
                     }
-                    .padding(.top, 32)
+                    .padding(.top, 40)
                     
                     // Stats Row
                     HStack(spacing: 40) {
@@ -102,6 +78,28 @@ struct DashboardView: View {
                         }
                     }
                     .padding(.horizontal, 24)
+                    
+                    // iOS 26 Foundation Models Feature
+                    #if canImport(FoundationModels)
+                    if let summary = aiSummary {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Image(systemName: "sparkles")
+                                    .foregroundColor(.purple)
+                                Text("Apple Intelligence")
+                                    .font(.headline)
+                            }
+                            Text(summary)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(.regularMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .padding(.horizontal, 24)
+                    }
+                    #endif
                     
                     // Recent Items
                     VStack(alignment: .leading, spacing: 16) {
@@ -135,7 +133,10 @@ struct DashboardView: View {
                 if profiles.isEmpty {
                     modelContext.insert(UserProfile())
                 }
+                generateAISummary()
             }
+            .onChange(of: consumptions.count) { _ in generateAISummary() }
+            .onChange(of: activities.count) { _ in generateAISummary() }
             .sheet(isPresented: $showingAddConsumption) {
                 AddConsumptionView()
             }
@@ -143,6 +144,23 @@ struct DashboardView: View {
                 AddActivityView()
             }
         }
+    }
+    
+    private func generateAISummary() {
+        #if canImport(FoundationModels)
+        Task {
+            let session = LanguageModelSession(instructions: "Ты ассистент по питанию. Кратко проанализируй день в 1-2 предложениях на основе съеденных калорий и активности.")
+            do {
+                let info = "Съедено: \(caloriesEaten) ккал. Сожжено: \(caloriesBurned) ккал. Осталось: \(caloriesRemaining) ккал."
+                let response = try await session.respond(to: info)
+                await MainActor.run {
+                    self.aiSummary = response.content
+                }
+            } catch {
+                print("AI error: \(error)")
+            }
+        }
+        #endif
     }
 }
 
