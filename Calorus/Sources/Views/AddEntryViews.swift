@@ -10,7 +10,7 @@ struct AddConsumptionView: View {
     @State private var selectedType: MealType = .lunch
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Детали")) {
                     TextField("Название (напр. Яблоко)", text: $name)
@@ -56,7 +56,7 @@ struct AddActivityView: View {
     @State private var calories: String = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Детали")) {
                     TextField("Активность (напр. Бег)", text: $name)

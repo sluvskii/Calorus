@@ -13,7 +13,6 @@ struct DashboardView: View {
     @State private var showingAddConsumption = false
     @State private var showingAddActivity = false
     @State private var aiSummary: String? = nil
-
     
     private var todayConsumptions: [Consumption] {
         let today = Date().startOfDay
@@ -42,7 +41,7 @@ struct DashboardView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 32) {
                     // Main Summary
@@ -95,7 +94,9 @@ struct DashboardView: View {
                                 .foregroundColor(.secondary)
                         }
                         .padding()
-                        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 16))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(.regularMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
                         .padding(.horizontal, 24)
                     }
                     #endif
@@ -124,9 +125,8 @@ struct DashboardView: View {
                             .padding(.horizontal, 24)
                         }
                     }
-                    
-                    Spacer(minLength: 100) // Padding for tab bar
                 }
+                .padding(.bottom, 40)
             }
             .navigationBarHidden(true)
             .onAppear {
@@ -199,8 +199,9 @@ struct ActionButton: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 16))
+            .background(Color(UIColor.secondarySystemBackground))
             .foregroundColor(color)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
         }
     }
 }
@@ -227,6 +228,7 @@ struct RecordRow: View {
                 .foregroundColor(isPositive ? .primary : .secondary)
         }
         .padding()
-        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 12))
+        .background(Color(UIColor.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }

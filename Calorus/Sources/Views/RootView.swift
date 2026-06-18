@@ -8,52 +8,24 @@ struct RootView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Group {
-                switch selectedTab {
-                case .dashboard:
-                    DashboardView()
-                case .history:
-                    HistoryView()
-                case .settings:
-                    SettingsView()
+        TabView(selection: $selectedTab) {
+            DashboardView()
+                .tabItem {
+                    Label("Главная", systemImage: "chart.pie.fill")
                 }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .tag(Tab.dashboard)
             
-            // Custom Floating Tab Bar
-            HStack(spacing: 0) {
-                TabBarButton(icon: "chart.pie.fill", isSelected: selectedTab == .dashboard) {
-                    selectedTab = .dashboard
+            HistoryView()
+                .tabItem {
+                    Label("История", systemImage: "list.bullet")
                 }
-                TabBarButton(icon: "list.bullet", isSelected: selectedTab == .history) {
-                    selectedTab = .history
+                .tag(Tab.history)
+            
+            SettingsView()
+                .tabItem {
+                    Label("Настройки", systemImage: "gearshape.fill")
                 }
-                TabBarButton(icon: "gearshape.fill", isSelected: selectedTab == .settings) {
-                    selectedTab = .settings
-                }
-            }
-            .padding(.vertical, 12)
-            .padding(.horizontal, 24)
-            .glassEffect(in: Capsule()) // iOS 26 Liquid Glass API
-            .shadow(radius: 12, y: 4)
-            .padding(.bottom, 16)
-        }
-        .ignoresSafeArea(.keyboard, edges: .bottom)
-    }
-}
-
-struct TabBarButton: View {
-    let icon: String
-    let isSelected: Bool
-    let action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: icon)
-                .font(.system(size: 22, weight: isSelected ? .bold : .regular))
-                .foregroundColor(isSelected ? .primary : .secondary)
-                .frame(maxWidth: .infinity)
+                .tag(Tab.settings)
         }
     }
 }

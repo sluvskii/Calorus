@@ -6,7 +6,7 @@ struct HistoryView: View {
     @Query(sort: \Activity.date, order: .reverse) private var activities: [Activity]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section(header: Text("Приемы пищи")) {
                     ForEach(consumptions) { item in
@@ -46,7 +46,7 @@ struct SettingsView: View {
     @State private var dailyGoal: String = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Цель")) {
                     HStack {
