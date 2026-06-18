@@ -7,14 +7,19 @@ final class Consumption {
     var name: String
     var calories: Int
     var date: Date
-    var type: MealType
+    private var mealTypeRawValue: String
     
     init(name: String, calories: Int, date: Date = Date(), type: MealType) {
         self.id = UUID()
         self.name = name
         self.calories = calories
         self.date = date
-        self.type = type
+        self.mealTypeRawValue = type.rawValue
+    }
+
+    var type: MealType {
+        get { MealType(rawValue: mealTypeRawValue) ?? .lunch }
+        set { mealTypeRawValue = newValue.rawValue }
     }
 }
 
@@ -207,17 +212,25 @@ enum ActivityType: String, Codable, CaseIterable {
 final class Activity {
     var id: UUID = UUID()
     var name: String = ""
-    var type: ActivityType = ActivityType.walking
+    private var activityTypeRawValue: String = ActivityType.walking.rawValue
     var inputValue: Double = 0
     var caloriesBurned: Int = 0
     var date: Date = Date()
 
     init(type: ActivityType, inputValue: Double, caloriesBurned: Int, date: Date = Date()) {
         self.name = type.rawValue
-        self.type = type
+        self.activityTypeRawValue = type.rawValue
         self.inputValue = inputValue
         self.caloriesBurned = caloriesBurned
         self.date = date
+    }
+
+    var type: ActivityType {
+        get { ActivityType(rawValue: activityTypeRawValue) ?? .walking }
+        set {
+            activityTypeRawValue = newValue.rawValue
+            name = newValue.rawValue
+        }
     }
 }
 
@@ -228,9 +241,9 @@ final class UserProfile {
     var weightKg: Double = 70
     var heightCm: Double = 175
     var age: Int = 30
-    var sex: BiologicalSex = BiologicalSex.male
-    var lifestyle: LifestyleActivityLevel = LifestyleActivityLevel.light
-    var goalPreference: GoalPreference = GoalPreference.maintain
+    private var sexRawValue: String = BiologicalSex.male.rawValue
+    private var lifestyleRawValue: String = LifestyleActivityLevel.light.rawValue
+    private var goalPreferenceRawValue: String = GoalPreference.maintain.rawValue
 
     init(
         dailyCalorieGoal: Int = 2000,
@@ -245,10 +258,25 @@ final class UserProfile {
         self.weightKg = weightKg
         self.heightCm = heightCm
         self.age = age
-        self.sex = sex
-        self.lifestyle = lifestyle
-        self.goalPreference = goalPreference
+        self.sexRawValue = sex.rawValue
+        self.lifestyleRawValue = lifestyle.rawValue
+        self.goalPreferenceRawValue = goalPreference.rawValue
         recalculateDailyCalorieGoal()
+    }
+
+    var sex: BiologicalSex {
+        get { BiologicalSex(rawValue: sexRawValue) ?? .male }
+        set { sexRawValue = newValue.rawValue }
+    }
+
+    var lifestyle: LifestyleActivityLevel {
+        get { LifestyleActivityLevel(rawValue: lifestyleRawValue) ?? .light }
+        set { lifestyleRawValue = newValue.rawValue }
+    }
+
+    var goalPreference: GoalPreference {
+        get { GoalPreference(rawValue: goalPreferenceRawValue) ?? .maintain }
+        set { goalPreferenceRawValue = newValue.rawValue }
     }
 
     func recalculateDailyCalorieGoal() {
