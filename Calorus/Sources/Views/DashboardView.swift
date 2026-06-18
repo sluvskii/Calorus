@@ -42,7 +42,9 @@ struct BlockDropDelegate: DropDelegate {
     }
 
     func performDrop(info: DropInfo) -> Bool {
-        draggedItem = nil
+        DispatchQueue.main.async {
+            self.draggedItem = nil
+        }
         return true
     }
 }
@@ -54,7 +56,7 @@ struct WiggleModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .rotationEffect(.degrees(isEditing ? (isWiggling ? 1.5 : -1.5) : 0))
+            .rotationEffect(.degrees(isEditing ? (isWiggling ? 0.8 : -0.8) : 0))
             .animation(isEditing ? .easeInOut(duration: 0.12).repeatForever(autoreverses: true) : .easeOut(duration: 0.1), value: isWiggling)
             .onChange(of: isEditing) { newValue in
                 isWiggling = newValue
@@ -68,11 +70,12 @@ struct WiggleModifier: ViewModifier {
 }
 
 // MARK: - View Modifier for Drag
-struct DraggableModifier: ViewModifier {
+struct DraggableModifier<Preview: View>: ViewModifier {
     let isEditing: Bool
     let block: DashboardBlock
     @Binding var activeBlocks: [DashboardBlock]
     @Binding var draggedBlock: DashboardBlock?
+    let preview: Preview
 
     func body(content: Content) -> some View {
         if isEditing {
@@ -81,6 +84,13 @@ struct DraggableModifier: ViewModifier {
                 .onDrag {
                     self.draggedBlock = block
                     return NSItemProvider(object: block.rawValue as NSString)
+                } preview: {
+                    preview
+                        .onDisappear {
+                            DispatchQueue.main.async {
+                                self.draggedBlock = nil
+                            }
+                        }
                 }
                 .onDrop(of: [.text], delegate: BlockDropDelegate(item: block, items: $activeBlocks, draggedItem: $draggedBlock))
         } else {
@@ -243,7 +253,8 @@ struct DashboardView: View {
                                 isEditing: isEditing,
                                 block: block,
                                 activeBlocks: Binding(get: { activeBlocks }, set: { activeBlocks = $0 }),
-                                draggedBlock: $draggedBlock
+                                draggedBlock: $draggedBlock,
+                                preview: blockView(for: block).frame(width: UIScreen.main.bounds.width - 40)
                             ))
                             .scaleEffect(isEditing ? 0.96 : 1.0)
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isEditing)
