@@ -1,0 +1,339 @@
+Command line invocation:
+    /Applications/Xcode_26.0.1.app/Contents/Developer/usr/bin/xcodebuild clean build -project Calorus.xcodeproj -scheme Calorus -configuration Release -sdk iphoneos -derivedDataPath ./build CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    CODE_SIGN_IDENTITY = 
+    CODE_SIGNING_ALLOWED = NO
+    CODE_SIGNING_REQUIRED = NO
+    SDKROOT = iphoneos26.0
+
+note: Using codesigning identity override: 
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+** CLEAN SUCCEEDED **
+
+note: Using codesigning identity override: 
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'Calorus' in project 'Calorus' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 1560fd7bc66a78ed5ba98682b51c249f
+Build description path: /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/XCBuildData/1560fd7bc66a78ed5ba98682b51c249f.xcbuilddata
+CreateBuildDirectory /Users/runner/work/Calorus/Calorus/build/Build/Products
+    cd /Users/runner/work/Calorus/Calorus/Calorus.xcodeproj
+    builtin-create-build-directory /Users/runner/work/Calorus/Calorus/build/Build/Products
+
+ClangStatCache /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk /Users/runner/work/Calorus/Calorus/build/SDKStatCaches.noindex/iphoneos26.0-23A339-3885c01c3e6b6a337905948deab2002ee897cee61435230feef45a4748fd4bcc.sdkstatcache
+    cd /Users/runner/work/Calorus/Calorus/Calorus.xcodeproj
+    /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -o /Users/runner/work/Calorus/Calorus/build/SDKStatCaches.noindex/iphoneos26.0-23A339-3885c01c3e6b6a337905948deab2002ee897cee61435230feef45a4748fd4bcc.sdkstatcache
+
+CreateBuildDirectory /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex
+    cd /Users/runner/work/Calorus/Calorus/Calorus.xcodeproj
+    builtin-create-build-directory /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus-3373ea046bec04b239dc5cb2b3f623ea-VFS-iphoneos/all-product-headers.yaml
+    cd /Users/runner/work/Calorus/Calorus/Calorus.xcodeproj
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus-3373ea046bec04b239dc5cb2b3f623ea-VFS-iphoneos/all-product-headers.yaml
+
+CreateBuildDirectory /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos
+    cd /Users/runner/work/Calorus/Calorus/Calorus.xcodeproj
+    builtin-create-build-directory /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos
+
+CreateBuildDirectory /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+    cd /Users/runner/work/Calorus/Calorus/Calorus.xcodeproj
+    builtin-create-build-directory /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/ExplicitPrecompiledModules
+    cd /Users/runner/work/Calorus/Calorus/Calorus.xcodeproj
+    builtin-create-build-directory /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/EagerLinkingTBDs/Release-iphoneos
+    cd /Users/runner/work/Calorus/Calorus/Calorus.xcodeproj
+    builtin-create-build-directory /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/EagerLinkingTBDs/Release-iphoneos
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.SwiftFileList (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus_const_extract_protocols.json (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.SwiftConstValuesFileList (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.LinkFileList (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus-OutputFileMap.json (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus.hmap (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus.hmap
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus.DependencyStaticMetadataFileList (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus.DependencyMetadataFileList (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-project-headers.hmap (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-project-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-own-target-headers.hmap (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-generated-files.hmap (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-generated-files.hmap
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-all-target-headers.hmap (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-all-non-framework-target-headers.hmap (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-DebugDylibPath-normal-arm64.txt (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-DebugDylibInstallName-normal-arm64.txt (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    write-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-DebugDylibInstallName-normal-arm64.txt
+
+MkDir /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/Calorus.app (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    /bin/mkdir -p /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/Calorus.app
+
+Ld /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/Calorus.app/__preview.dylib normal (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios26.0 -dynamiclib -isysroot /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -Os -L/Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos -F/Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos -install_name @rpath/Calorus.debug.dylib -dead_strip -Xlinker -dependency_info -Xlinker /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus_dependency_info.dat -o /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/Calorus.app/__preview.dylib
+
+ProcessInfoPlistFile /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/Calorus.app/Info.plist /Users/runner/work/Calorus/Calorus/Calorus/Info.plist (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    builtin-infoPlistUtility /Users/runner/work/Calorus/Calorus/Calorus/Info.plist -producttype com.apple.product-type.application -genpkginfo /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/Calorus.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -requiredArchitecture arm64 -o /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/Calorus.app/Info.plist
+warning: 'UIRequiresFullScreen' has been deprecated starting in iOS 26.0 and will be ignored in a future release. See the UIRequiresFullScreen documentation for more details. (in target 'Calorus' from project 'Calorus')
+
+SwiftDriver Calorus normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    builtin-SwiftDriver -- /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Calorus -Onone -whole-module-optimization -enforce-exclusivity\=checked @/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -target arm64-apple-ios26.0 -g -module-cache-path /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -index-store-path /Users/runner/work/Calorus/Calorus/build/Index.noindex/DataStore -swift-version 5 -I /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos -F /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos -c -num-threads 3 -Xcc -ivfsstatcache -Xcc /Users/runner/work/Calorus/Calorus/build/SDKStatCaches.noindex/iphoneos26.0-23A339-3885c01c3e6b6a337905948deab2002ee897cee61435230feef45a4748fd4bcc.sdkstatcache -output-file-map /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex -sdk-module-cache-path /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-generated-files.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-own-target-headers.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-project-headers.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/include -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus-Swift.h -working-directory /Users/runner/work/Calorus/Calorus -no-emit-module-separately-wmo
+
+SwiftDriver\ Compilation Calorus normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    builtin-Swift-Compilation -- /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Calorus -Onone -whole-module-optimization -enforce-exclusivity\=checked @/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.SwiftFileList -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -target arm64-apple-ios26.0 -g -module-cache-path /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -index-store-path /Users/runner/work/Calorus/Calorus/build/Index.noindex/DataStore -swift-version 5 -I /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos -F /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos -c -num-threads 3 -Xcc -ivfsstatcache -Xcc /Users/runner/work/Calorus/Calorus/build/SDKStatCaches.noindex/iphoneos26.0-23A339-3885c01c3e6b6a337905948deab2002ee897cee61435230feef45a4748fd4bcc.sdkstatcache -output-file-map /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex -sdk-module-cache-path /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-generated-files.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-own-target-headers.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-project-headers.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/include -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources -emit-objc-header -emit-objc-header-path /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus-Swift.h -working-directory /Users/runner/work/Calorus/Calorus -no-emit-module-separately-wmo
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stddef-7K46V0XAFVG1TOMOMBJSSEYBM.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_float-AMO4HXZB0LK32QG3NIC6HJ4W6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_AvailabilityInternal-4YT5E7GDLDQYB0X64204VC9MC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/DeveloperToolsSupport-CORS0UBK74DTN4Q1UTZDPLJ3K.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stdarg-B5DEYDZU7N1W7JMKTX0H664KZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/SwiftShims-461750XSOR40V7Y0A4AH4JIA7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stdbool-9CQK1ATKSSSHVP9V3FOP0DQD3.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_SwiftConcurrencyShims-45ICARDDE34KRTZEJOKHPAMK4.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/ptrcheck-7QFV5P0F22NI9LVEZWZ53JC6R.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/ptrauth-BYHOAU7NCLLNN7WQSAEFTVFJS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_DarwinFoundation1-EQCIPS1BIFKJMBBLW9JCRN7Y4.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_DarwinFoundation2-E28980HLNOC1DGYVC7RAFL0PW.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_limits-13H1PPVXFOSWD9G66V6RNVGCU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stdint-AMMDTZFXSHCFHG3C6O64MZ7MC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/sys_types-AEMJFSW5T46AJSZPWQIF22B1X.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_tgmath-AXMLLTP5ZLDV40XUS7HDLGC1K.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stdatomic-DZQL95RLNKUBMC19N5J78509M.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_intrinsics-3CBKDORVB2ULJ359CXK113E1V.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_DarwinFoundation3-RVHDWHY9VWZSNLEVUJ2YKV2B.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_inttypes-2ZR3UUQQNY3F2ETFOMF1MHPWX.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Darwin-48LTTPRG70OAPDEEG5XZGX40Y.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/simd-BC3TJY99NSZFJJMYGYXD5XVC3.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/MachO-12ITZW3Q6G2P9AP7FDNGEGFGV.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/ObjectiveC-C8LQMIZKKWK2ND993ZG9CIWKI.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/os_object-2Y60FW8TZTNACG1GLWGGUBY5M.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/os_workgroup-EG4FYJNFN16P0SYXY0DFWT5K5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Dispatch-CSP99FJOSEXD9OY4Q8US5X50D.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Spatial-I308KKT9P59WNDO241DXOSRG.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreFoundation-5LO5J0AO197N9KI9D0N06IOW3.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/XPC-DLSLQJIU5KVP2BEIL3K5B6O5W.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/os-2FX965Z3U80AW3XUZWRLQW6MR.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CFNetwork-2YOY3F9CUPV5XBEDDIL00K49F.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Security-BQM6DJAMLELFSSDKFXTDI96OU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreGraphics-1160RZM164WRSG97IXBGCFFKS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Foundation-2SVZKAJ1GJCHO9DLF4D2RCSDG.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/ImageIO-20WOZZ9V3DZ3DSVULDNBQFLZU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreText-4MN11873L0S3QAR5OXUD8B93I.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/UIUtilities-88OI95KP6AFAJN5RR6B4W4AP8.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreTransferable-DJGZ77MWPRS9PIPE4QDWBWOOB.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Symbols-14OO87HZUA284DUZZXPVRZKG6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreData-7LF02KTBI7WQL15OG23EPICKP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Accessibility-B5OU9NQWXAO2QDZXDK87LL3M0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/UserNotifications-7ZJ6U7GD50YTTEKTP37182784.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/IOSurface-T9HXYDBWJEH4K42GDR6Q7R5L.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/OSLog-ELR2VYSV1MTYIADD54OS7X66B.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/UniformTypeIdentifiers-DASG3I67TRTFEZSZ84YIGO88R.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/FileProvider-5JVRFSPUOCT7ZR974VZDAMJTN.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Metal-6D366E1YSRB6Y177EI0EVD2VP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/OpenGLES-6RSP5B83B5YMYUWQR0O6QI1XK.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/DataDetection-D7X4RZFYXK7W6JHV4H58EFY36.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreVideo-4XQ9MUFW7Y2Y0LN51E8G6L5MP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/QuartzCore-D8LT9ND4511H4NZYERWHCDIX8.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreImage-9GMSQ0LI5MAFVCGN4472G9V2K.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/SwiftUICore-7R9KEJFBSNODLAJLLJVQ1Y462.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/UIKit-7L4WPEQ3HSXPVBNCL9JCBG4AF.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/SwiftUI-6CXYJ7V2ZY0KWPGAVCFJIODPZ.pcm
+
+SwiftCompile normal arm64 Compiling\ AddEntryViews.swift,\ CalorusApp.swift,\ DashboardView.swift,\ DataModels.swift,\ Date+Extensions.swift,\ RootView.swift,\ SecondaryViews.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/AddEntryViews.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/CalorusApp.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/DashboardView.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Utils/Date+Extensions.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/RootView.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/SecondaryViews.swift /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Spatial.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/DeveloperToolsSupport.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/simd.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/os.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/FileProvider.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/XPC.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/_StringProcessing.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/CoreData.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Darwin.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Observation.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/SwiftOnoneSupport.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/OSLog.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/_Builtin_float.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/_DarwinFoundation3.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/CoreText.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/System.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Symbols.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/QuartzCore.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/CoreImage.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/UniformTypeIdentifiers.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/_DarwinFoundation1.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/SwiftUI.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Metal.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Foundation.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/DataDetection.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/CoreVideo.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/CoreFoundation.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/_DarwinFoundation2.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Combine.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Accessibility.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/SwiftData.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/SwiftUICore.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/_SwiftData_SwiftUI.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Dispatch.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/ObjectiveC.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/CoreTransferable.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/_Concurrency.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/UIKit.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/CoreGraphics.swiftmodule/arm64e-apple-ios.swiftmodule /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/26.0/Swift.swiftmodule/arm64e-apple-ios.swiftmodule /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/ptrcheck-7QFV5P0F22NI9LVEZWZ53JC6R.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/QuartzCore-D8LT9ND4511H4NZYERWHCDIX8.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stdint-AMMDTZFXSHCFHG3C6O64MZ7MC.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/simd-BC3TJY99NSZFJJMYGYXD5XVC3.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreVideo-4XQ9MUFW7Y2Y0LN51E8G6L5MP.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Foundation-2SVZKAJ1GJCHO9DLF4D2RCSDG.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/FileProvider-5JVRFSPUOCT7ZR974VZDAMJTN.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CFNetwork-2YOY3F9CUPV5XBEDDIL00K49F.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/IOSurface-T9HXYDBWJEH4K42GDR6Q7R5L.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Dispatch-CSP99FJOSEXD9OY4Q8US5X50D.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/MachO-12ITZW3Q6G2P9AP7FDNGEGFGV.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreText-4MN11873L0S3QAR5OXUD8B93I.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/SwiftUICore-7R9KEJFBSNODLAJLLJVQ1Y462.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreData-7LF02KTBI7WQL15OG23EPICKP.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreTransferable-DJGZ77MWPRS9PIPE4QDWBWOOB.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_DarwinFoundation3-RVHDWHY9VWZSNLEVUJ2YKV2B.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/sys_types-AEMJFSW5T46AJSZPWQIF22B1X.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/ptrauth-BYHOAU7NCLLNN7WQSAEFTVFJS.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_inttypes-2ZR3UUQQNY3F2ETFOMF1MHPWX.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Accessibility-B5OU9NQWXAO2QDZXDK87LL3M0.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/ObjectiveC-C8LQMIZKKWK2ND993ZG9CIWKI.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/os_workgroup-EG4FYJNFN16P0SYXY0DFWT5K5.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stddef-7K46V0XAFVG1TOMOMBJSSEYBM.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/SwiftShims-461750XSOR40V7Y0A4AH4JIA7.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Security-BQM6DJAMLELFSSDKFXTDI96OU.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_SwiftConcurrencyShims-45ICARDDE34KRTZEJOKHPAMK4.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/UniformTypeIdentifiers-DASG3I67TRTFEZSZ84YIGO88R.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/SwiftUI-6CXYJ7V2ZY0KWPGAVCFJIODPZ.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_DarwinFoundation2-E28980HLNOC1DGYVC7RAFL0PW.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Spatial-I308KKT9P59WNDO241DXOSRG.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stdarg-B5DEYDZU7N1W7JMKTX0H664KZ.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/UIUtilities-88OI95KP6AFAJN5RR6B4W4AP8.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_float-AMO4HXZB0LK32QG3NIC6HJ4W6.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/DeveloperToolsSupport-CORS0UBK74DTN4Q1UTZDPLJ3K.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/XPC-DLSLQJIU5KVP2BEIL3K5B6O5W.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/OSLog-ELR2VYSV1MTYIADD54OS7X66B.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/os_object-2Y60FW8TZTNACG1GLWGGUBY5M.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_AvailabilityInternal-4YT5E7GDLDQYB0X64204VC9MC.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_tgmath-AXMLLTP5ZLDV40XUS7HDLGC1K.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/UserNotifications-7ZJ6U7GD50YTTEKTP37182784.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_DarwinFoundation1-EQCIPS1BIFKJMBBLW9JCRN7Y4.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_intrinsics-3CBKDORVB2ULJ359CXK113E1V.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/UIKit-7L4WPEQ3HSXPVBNCL9JCBG4AF.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreImage-9GMSQ0LI5MAFVCGN4472G9V2K.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stdbool-9CQK1ATKSSSHVP9V3FOP0DQD3.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreFoundation-5LO5J0AO197N9KI9D0N06IOW3.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/DataDetection-D7X4RZFYXK7W6JHV4H58EFY36.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_limits-13H1PPVXFOSWD9G66V6RNVGCU.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Symbols-14OO87HZUA284DUZZXPVRZKG6.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/CoreGraphics-1160RZM164WRSG97IXBGCFFKS.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/os-2FX965Z3U80AW3XUZWRLQW6MR.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Metal-6D366E1YSRB6Y177EI0EVD2VP.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/ImageIO-20WOZZ9V3DZ3DSVULDNBQFLZU.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/OpenGLES-6RSP5B83B5YMYUWQR0O6QI1XK.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Darwin-48LTTPRG70OAPDEEG5XZGX40Y.pcm /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/_Builtin_stdatomic-DZQL95RLNKUBMC19N5J78509M.pcm /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus-dependencies-1.json (in target 'Calorus' from project 'Calorus')
+
+CompileSwift normal arm64 (in target 'Calorus' from project 'Calorus')
+    cd /Users/runner/work/Calorus/Calorus
+    
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:210:9: error: A default value requires a fully qualified domain named value (from macro 'Model')
+    var type: ActivityType = .walking
+        ^~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/DashboardView.swift:114:14: warning: 'onChange(of:perform:)' was deprecated in iOS 17.0: Use `onChange` with a two or zero parameter action closure instead.
+            .onChange(of: profiles.count) { _ in
+             ^
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/DashboardView.swift:135:79: error: member 'red' in 'HierarchicalShapeStyle' produces result of type 'Color', but context expects 'HierarchicalShapeStyle'
+                        .foregroundStyle(caloriesRemaining >= 0 ? .primary : .red)
+                                                                              ^
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/DashboardView.swift:135:79: error: static property 'red' requires the types 'HierarchicalShapeStyle' and 'Color' be equivalent
+                        .foregroundStyle(caloriesRemaining >= 0 ? .primary : .red)
+                                                                              ^
+SwiftUI.ShapeStyle:2:11: note: where 'Self' = 'HierarchicalShapeStyle'
+extension ShapeStyle where Self == Color {
+          ^
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:231:9: error: A default value requires a fully qualified domain named value (from macro 'Model')
+    var sex: BiologicalSex = .male
+        ^~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:232:9: error: A default value requires a fully qualified domain named value (from macro 'Model')
+    var lifestyle: LifestyleActivityLevel = .light
+        ^~~~~~~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:233:9: error: A default value requires a fully qualified domain named value (from macro 'Model')
+    var goalPreference: GoalPreference = .maintain
+        ^~~~~~~~~~~~~~
+@__swiftmacro_7Calorus8Activity5ModelfMm_.swift:17:93: error: type 'Any?' has no member 'walking'
+    SwiftData.Schema.PropertyMetadata(name: "type", keypath: \Activity.type, defaultValue: .walking, metadata: nil),
+                                                                                           ~^~~~~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:206:1: note: in expansion of macro 'Model' on class 'Activity' here
+@Model
+^~~~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:206:1: note: in expansion of macro 'Model' on class 'Activity' here
+@Model
+^~~~~~
+@__swiftmacro_7Calorus11UserProfile5ModelfMm_.swift:20:94: error: type 'Any?' has no member 'male'
+    SwiftData.Schema.PropertyMetadata(name: "sex", keypath: \UserProfile.sex, defaultValue: .male, metadata: nil),
+                                                                                            ~^~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:224:1: note: in expansion of macro 'Model' on class 'UserProfile' here
+@Model
+^~~~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:224:1: note: in expansion of macro 'Model' on class 'UserProfile' here
+@Model
+^~~~~~
+@__swiftmacro_7Calorus11UserProfile5ModelfMm_.swift:21:106: error: type 'Any?' has no member 'light'
+    SwiftData.Schema.PropertyMetadata(name: "lifestyle", keypath: \UserProfile.lifestyle, defaultValue: .light, metadata: nil),
+                                                                                                        ~^~~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:224:1: note: in expansion of macro 'Model' on class 'UserProfile' here
+@Model
+^~~~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:224:1: note: in expansion of macro 'Model' on class 'UserProfile' here
+@Model
+^~~~~~
+@__swiftmacro_7Calorus11UserProfile5ModelfMm_.swift:22:116: error: type 'Any?' has no member 'maintain'
+    SwiftData.Schema.PropertyMetadata(name: "goalPreference", keypath: \UserProfile.goalPreference, defaultValue: .maintain, metadata: nil)
+                                                                                                                  ~^~~~~~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:224:1: note: in expansion of macro 'Model' on class 'UserProfile' here
+@Model
+^~~~~~
+/Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift:224:1: note: in expansion of macro 'Model' on class 'UserProfile' here
+@Model
+^~~~~~
+
+Failed frontend command:
+/Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -c /Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/AddEntryViews.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/CalorusApp.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/DashboardView.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Models/DataModels.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Utils/Date+Extensions.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/RootView.swift /Users/runner/work/Calorus/Calorus/Calorus/Sources/Views/SecondaryViews.swift -supplementary-output-file-map /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/supplementaryOutputs-1 -target arm64-apple-ios26.0 -disable-cross-import-overlay-search -swift-module-cross-import SwiftData /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/SwiftData.framework/Modules/SwiftData.swiftcrossimport/CoreData.swiftoverlay -swift-module-cross-import SwiftData /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/SwiftData.framework/Modules/SwiftData.swiftcrossimport/SwiftUI.swiftoverlay -load-resolved-plugin /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libFoundationMacros.dylib\#/Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#FoundationMacros -load-resolved-plugin /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libObservationMacros.dylib\#/Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#ObservationMacros -load-resolved-plugin /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libPreviewsMacros.dylib\#/Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#PreviewsMacros -load-resolved-plugin /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftDataMacros.dylib\#/Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftDataMacros -load-resolved-plugin /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#/Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftMacros -load-resolved-plugin /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftUIMacros.dylib\#/Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftUIMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Applications/Xcode_26.0.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk -I /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos -F /Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos -no-color-diagnostics -Xcc -fno-color-diagnostics -g -debug-info-format\=dwarf -dwarf-version\=5 -module-cache-path /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -swift-version 5 -enforce-exclusivity\=checked -Onone -serialize-debugging-options -const-gather-protocols-file /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Calorus_const_extract_protocols.json -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file /Users/runner/work/Calorus/Calorus/build/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /Users/runner/work/Calorus/Calorus -enable-anonymous-context-mangled-names -file-compilation-dir /Users/runner/work/Calorus/Calorus -Xcc -ivfsstatcache -Xcc /Users/runner/work/Calorus/Calorus/build/SDKStatCaches.noindex/iphoneos26.0-23A339-3885c01c3e6b6a337905948deab2002ee897cee61435230feef45a4748fd4bcc.sdkstatcache -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-generated-files.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-own-target-headers.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Calorus-project-headers.hmap -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Products/Release-iphoneos/include -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/DerivedSources -no-auto-bridging-header-chaining -module-name Calorus -frontend-parseable-output -disable-clang-spi -target-sdk-version 26.0 -target-sdk-name iphoneos26.0 -clang-target arm64-apple-ios26.0 -in-process-plugin-server-path /Applications/Xcode_26.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -num-threads 3 -o /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/AddEntryViews.o -o /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/CalorusApp.o -o /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/DashboardView.o -o /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/DataModels.o -o /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Date+Extensions.o -o /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/RootView.o -o /Users/runner/work/Calorus/Calorus/build/Build/Intermediates.noindex/Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/SecondaryViews.o -index-unit-output-path /Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/AddEntryViews.o -index-unit-output-path /Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/CalorusApp.o -index-unit-output-path /Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/DashboardView.o -index-unit-output-path /Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/DataModels.o -index-unit-output-path /Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/Date+Extensions.o -index-unit-output-path /Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/RootView.o -index-unit-output-path /Calorus.build/Release-iphoneos/Calorus.build/Objects-normal/arm64/SecondaryViews.o -index-store-path /Users/runner/work/Calorus/Calorus/build/Index.noindex/DataStore -index-system-modules

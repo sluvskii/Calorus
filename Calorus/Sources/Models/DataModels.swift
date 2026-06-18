@@ -207,7 +207,7 @@ enum ActivityType: String, Codable, CaseIterable {
 final class Activity {
     var id: UUID = UUID()
     var name: String = ""
-    var type: ActivityType = .walking
+    var type: ActivityType = ActivityType.walking
     var inputValue: Double = 0
     var caloriesBurned: Int = 0
     var date: Date = Date()
@@ -228,9 +228,9 @@ final class UserProfile {
     var weightKg: Double = 70
     var heightCm: Double = 175
     var age: Int = 30
-    var sex: BiologicalSex = .male
-    var lifestyle: LifestyleActivityLevel = .light
-    var goalPreference: GoalPreference = .maintain
+    var sex: BiologicalSex = BiologicalSex.male
+    var lifestyle: LifestyleActivityLevel = LifestyleActivityLevel.light
+    var goalPreference: GoalPreference = GoalPreference.maintain
 
     init(
         dailyCalorieGoal: Int = 2000,

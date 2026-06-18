@@ -111,7 +111,7 @@ struct DashboardView: View {
                 ensureProfileExists()
                 profile?.recalculateDailyCalorieGoal()
             }
-            .onChange(of: profiles.count) { _ in
+            .onChange(of: profiles.count) { _, _ in
                 ensureProfileExists()
             }
             .sheet(isPresented: $showingAddConsumption) {
@@ -132,7 +132,7 @@ struct DashboardView: View {
                         .foregroundStyle(.secondary)
                     Text("Осталось \(caloriesRemaining) ккал")
                         .font(.system(size: 34, weight: .bold, design: .rounded))
-                        .foregroundStyle(caloriesRemaining >= 0 ? .primary : .red)
+                        .foregroundColor(caloriesRemaining >= 0 ? .primary : .red)
                 }
 
                 Spacer()
